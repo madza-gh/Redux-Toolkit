@@ -5,7 +5,7 @@ type ProductProps ={
     image: string
 }
 
-function product({title, price, image}: ProductProps){
+function Product({title, price, image}: ProductProps){
     return(
         <div className="product">
             <img src={image} />
@@ -20,4 +20,4 @@ function product({title, price, image}: ProductProps){
     )
 }
 
-export default product
+export default Product
