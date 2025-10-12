@@ -1,3 +1,7 @@
+import { useDispatch } from "react-redux"
+
+import { addToCart } from "../store/cart-slice"
+
 type ProductProps ={
     id: string
     title: string
@@ -5,7 +9,13 @@ type ProductProps ={
     image: string
 }
 
-function Product({title, price, image}: ProductProps){
+function Product({id, title, price, image}: ProductProps){
+    const dispatch = useDispatch()
+
+    function handleAddToCart(){
+        dispatch(addToCart({id, title, price}))
+    }
+
     return(
         <div className="product">
             <img src={image} />

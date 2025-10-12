@@ -1,4 +1,4 @@
-import CartItems from "./cartItems"
+import CartItems from "./CartItems"
 
 
 type CartProps = {
