@@ -13,7 +13,7 @@ function Cart({ onClose }: CartProps) {
   return (
     <>
       <div className="cart-backdrop" onClick={handleBackdropClick}>
-        <div className="cart-modal" onClick={handleModalClick}>
+        <div className="cart-modal" role="dialog" aria-modal="true" onClick={handleModalClick}>
           <h2>سبد خرید</h2>
           <CartItems />
           <p className="cart-actions">
