@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import CartItems from "./CartItems";
 
 type CartProps = {
@@ -5,17 +6,19 @@ type CartProps = {
 };
 
 function Cart({ onClose }: CartProps) {
-
-  return (
+  return createPortal(
     <>
-      <dialog className="cart-modal" open>
-        <h2>سبد خرید</h2>
-        <CartItems />
-        <p className="cart-actions">
-          <button onClick={onClose}>بستن</button>
-        </p>
-      </dialog>
-    </>
+      <div className="cart-backdrop">
+        <dialog className="cart-modal" open>
+          <h2>سبد خرید</h2>
+          <CartItems />
+          <p className="cart-actions">
+            <button onClick={onClose}>بستن</button>
+          </p>
+        </dialog>
+      </div>
+    </>,
+    document.getElementById("modal")!
   );
 }
 
