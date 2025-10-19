@@ -1,15 +1,39 @@
 import { createPortal } from "react-dom";
 import CartItems from "./CartItems";
+import { KeyboardEvent, useEffect } from "react";
 
 type CartProps = {
   onClose: () => void;
 };
 
 function Cart({ onClose }: CartProps) {
+
+  const handleBackdropClick = () =>{
+    onClose()
+  }
+
+  const handleDialogClick = (e: React.MouseEvent) =>{
+    e.stopPropagation()
+  }
+
+  useEffect(() =>{
+    const handleEscapeKey = (e: KeyboardEvent) =>{
+      if(e.key === "Escape"){
+        onClose()
+      }
+    }
+    document.addEventListener("keydown", handleEscapeKey)
+
+    return () =>{
+      document.removeEventListener("keydown", handleEscapeKey)
+    }
+
+  }, [onClose])
+
   return createPortal(
     <>
-      <div className="cart-backdrop">
-        <dialog className="cart-modal" open>
+      <div onClick={handleBackdropClick} className="cart-backdrop" >
+        <dialog onClick={handleDialogClick} className="cart-modal" open>
           <h2>سبد خرید</h2>
           <CartItems />
           <p className="cart-actions">
