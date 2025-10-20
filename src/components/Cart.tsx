@@ -17,7 +17,7 @@ function Cart({ onClose }: CartProps) {
   }
 
   useEffect(() =>{
-    const handleEscapeKey = (e: KeyboardEvent) =>{
+    const handleEscapeKey = (e: globalThis.KeyboardEvent) =>{
       if(e.key === "Escape"){
         onClose()
       }
