@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 import CartItems from "./CartItems";
-import { KeyboardEvent, useEffect } from "react";
+import { useEffect } from "react";
 
 type CartProps = {
   onClose: () => void;
