@@ -33,6 +33,21 @@
   .navbar button:hover {
     border: 1px solid #bdbdbd;
   }
+
+  .nav-link {
+    background: none;
+    border: 1px solid #757575;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    color: #fafafa;
+    font-size: 1.25rem;
+    cursor: pointer;
+    font-family: 'Vazirmatn';
+}
+
+.nav-link:hover {
+   border: 1px solid #bdbdbd;
+}
   
   .product-list {
     width: 70%;
