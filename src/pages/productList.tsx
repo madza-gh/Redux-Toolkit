@@ -1,13 +1,14 @@
-import { type ReactNode } from "react";
+import { productData } from "../data/items";
+import Product from "../components/Product";
 
-type ProductListProps = {
-  children: ReactNode;
-};
-
-function ProductList({ children }: ProductListProps) {
+function ProductList() {
   return (
     <div className="product-list">
-      <div className="product-items">{children}</div>
+      <div className="product-items">
+        {productData.map((item) => (
+          <Product key={item.id} {...item}/>
+        ))}
+      </div>
     </div>
   );
 }
