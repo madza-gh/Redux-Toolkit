@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Cart from "./Cart";
 
-import { useCartSelector } from "../store/hooks";
+import { useAppSelector } from "../store/hooks";
 
 function Navbar() {
   const [cartIsOpen, setCartIsOpen] = useState(false);
 
-  const cartQuantity = useCartSelector((state) =>
+  const cartQuantity = useAppSelector((state) =>
     state.cart.items.reduce((value, item) => value + item.quantity, 0)
   );
 

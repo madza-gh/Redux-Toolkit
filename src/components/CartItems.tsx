@@ -1,10 +1,10 @@
-import { useCartDispatch, useCartSelector } from "../store/hooks"
+import { useAppDispatch, useAppSelector } from "../store/hooks"
 import {type CartItem,addToCart, removeFromCart } from "../store/cart-slice"
 
 
 function CartItems (){
-    const cartItems = useCartSelector((state) => state.cart.items)
-    const dispatch = useCartDispatch()
+    const cartItems = useAppSelector((state) => state.cart.items)
+    const dispatch = useAppDispatch()
 
     const totalPrice = cartItems.reduce((value, item) => value + item.price * item.quantity,0)
 

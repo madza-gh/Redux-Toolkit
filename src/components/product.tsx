@@ -1,4 +1,4 @@
-import { useCartDispatch } from "../store/hooks"
+import { useAppDispatch } from "../store/hooks"
 
 import { addToCart } from "../store/cart-slice"
 
@@ -10,7 +10,7 @@ type ProductProps ={
 }
 
 function Product({id, title, price, image}: ProductProps){
-    const dispatch = useCartDispatch()
+    const dispatch = useAppDispatch()
 
     function handleAddToCart(){
         dispatch(addToCart({id, title, price}))
