@@ -1,11 +1,21 @@
 import { useState } from "react";
+import { useAppDispatch } from "../store/hooks";
+import { addProduct } from "../store/productSlice";
+import { v4 as uuidv4 } from "uuid"
 
 function AddProduct() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
 
+  const dispatch = useAppDispatch()
+
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    dispatch(addProduct({
+      id: uuidv4(),
+      title,
+      price: parseFloat(price)}))
 
     console.log("product added", { title, price });
 
@@ -23,7 +33,7 @@ function AddProduct() {
             type="text"
             value={title}
             onChange={(e) => {
-              e.target.value;
+              setTitle(e.target.value);
             }}
           />
         </div>
@@ -33,7 +43,7 @@ function AddProduct() {
             type="text"
             value={price}
             onChange={(e) => {
-              e.target.value;
+              setPrice(e.target.value);
             }}
           />
         </div>
