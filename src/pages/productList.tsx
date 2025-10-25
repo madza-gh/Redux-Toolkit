@@ -1,11 +1,14 @@
-import { productData } from "../data/items";
 import Product from "../components/Product";
+import { useAppSelector } from "../store/hooks";
 
 function ProductList() {
+
+  const products = useAppSelector((state) => state.products.items)
+  
   return (
     <div className="product-list">
       <div className="product-items">
-        {productData.map((item) => (
+        {products.map((item) => (
           <Product key={item.id} {...item}/>
         ))}
       </div>

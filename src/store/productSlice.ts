@@ -4,6 +4,7 @@ type Product={
     id: string
     title: string
     price: number
+    image: string
 }
 
 type ProductState ={
