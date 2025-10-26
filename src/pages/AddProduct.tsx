@@ -29,7 +29,7 @@ function AddProduct() {
   };
 
   return (
-    <section>
+    <section className="add-product">
       <h2>صفحه افزودن محصول</h2>
       <form onSubmit={handleOnSubmit}>
         <div>

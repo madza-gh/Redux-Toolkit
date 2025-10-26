@@ -251,3 +251,29 @@
       transform: translateX(0);
     }
   }
+
+  .add-product{
+     width: 100%;
+    font-family: 'Vazirmatn';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .add-product h2{
+    text-align: center;
+  }
+
+  .add-product form {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  width: 90%;
+}
+
+.add-product form input,
+.add-product form button {
+  padding: 0.5rem;
+  font-family: inherit;
+}
