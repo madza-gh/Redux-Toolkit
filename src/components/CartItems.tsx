@@ -12,8 +12,8 @@ function CartItems (){
         dispatch(addToCart(item))
     }
 
-    function handleMinus(id: string){
-        dispatch(removeFromCart(id))
+    function handleMinus(_id: string){
+        dispatch(removeFromCart(_id))
     }
 
     return  (
@@ -22,12 +22,12 @@ function CartItems (){
             <ul className="cart-items">
                 {cartItems.map((item) => {
                     return(
-                        <li key={item.id}>
+                        <li key={item._id}>
                             <div>
                                 <span>{item.title}</span>
                             </div>
                             <div className="cart-item-actions">
-                            <button onClick={() => handleMinus(item.id)}>-</button>
+                            <button onClick={() => handleMinus(item._id)}>-</button>
                             <span>{item.quantity}</span>
                             <button onClick={() => handlePlus(item)}>+</button>
                             </div>
