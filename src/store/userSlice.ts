@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { login, register, userProfile, type UserType } from "../api/userApi";
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
