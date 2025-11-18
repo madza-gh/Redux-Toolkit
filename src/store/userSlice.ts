@@ -50,7 +50,7 @@ export const getUserProfile = createAsyncThunk(
 
         } catch (error: any) {
             return rejectWithValue(
-                error.response?.data?.message || 'profile fetch found'
+                error.response?.data?.message || 'profile fetch failed'
             )
         }
     }
@@ -66,8 +66,8 @@ const userSlice = createSlice({
     },
     reducers:{
         logout: (state) => {
-            state.userInfo = null,
-            state.profile = null,
+            state.userInfo = null
+            state.profile = null
             localStorage.removeItem('userInfo')
         }
     },

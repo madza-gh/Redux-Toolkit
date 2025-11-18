@@ -1,44 +1,64 @@
-import { useAppDispatch, useAppSelector } from "../store/hooks"
-import { closeLoginModal } from "../store/uiSlice"
-import { useState } from "react"
-import { loginUser } from "../store/userSlice"
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { closeLoginModal } from "../store/uiSlice";
+import { useEffect, useState } from "react";
+import { loginUser } from "../store/userSlice";
 
+function LoginModal() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-function LoginModal(){
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+  const dispatch = useAppDispatch();
 
-    const dispatch = useAppDispatch()
+  const { loading, error, userInfo } = useAppSelector((state) => state.user);
 
-    const {loading, error, userInfo} = useAppSelector((state) => state.user)
-
-    function handleCloseButton(){
-    dispatch(closeLoginModal())
-}
-    function handleOnSubmit (e: React.FormEvent){
-        e.preventDefault()
-
-        dispatch(loginUser({
-            email,
-            password
-        }))
+  useEffect(() =>{
+    if(userInfo){
+        dispatch(closeLoginModal())
     }
+  },[userInfo])
 
-    return(
-        <div className="modal-backdrop">
-            <div className="modal">
-                <button className="close-btn" onClick={handleCloseButton}>x</button>
+  function handleCloseButton() {
+    dispatch(closeLoginModal());
+  }
+  function handleOnSubmit(e: React.FormEvent) {
+    e.preventDefault();
 
-                <h2>ورود</h2>
+    dispatch(
+      loginUser({
+        email,
+        password,
+      })
+    );
+  }
 
-                <form onSubmit={handleOnSubmit}>
-                    <input onChange={(e) => setEmail(e.target.value)} type="email" placeholder="ایمیل" />
-                    <input onChange={(e) => setPassword(e.target.value)} type="password"  placeholder="رمز عبور"/>
-                    <button type="submit" disabled ={loading}>{loading ?"درحال ورود":"ورود"}</button>
-                </form>
-            </div>
-        </div>
-    )
+  return (
+    <div className="modal-backdrop">
+      <div className="modal">
+        <button className="close-btn" onClick={handleCloseButton}>
+          x
+        </button>
+
+        <h2>ورود</h2>
+
+        <form onSubmit={handleOnSubmit}>
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="ایمیل"
+          />
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="رمز عبور"
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? "درحال ورود" : "ورود"}
+          </button>
+        </form>
+        {error && <p>{error}</p>}
+      </div>
+    </div>
+  );
 }
 
-export default LoginModal
+export default LoginModal;
