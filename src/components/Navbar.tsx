@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import Cart from "./Cart";
 import LoginModal from "./LoginModal";
 import {openLoginModal} from '../store/uiSlice'
-
+import { logout } from "../store/userSlice";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
 
 function Navbar() {
   const [cartIsOpen, setCartIsOpen] = useState(false);
 
   const dispatch = useAppDispatch()
+
+  const {userInfo} = useAppSelector((state) => state.user)
 
   const isOpen = useAppSelector(state => state.ui.loginModalOpen)
 
@@ -29,6 +31,10 @@ function Navbar() {
     dispatch(openLoginModal())
   }
 
+  function handleLogOut(){
+    dispatch(logout())
+  }
+
   return (
     <>
       {cartIsOpen && <Cart onClose={handleCloseCart} />}
@@ -44,7 +50,12 @@ function Navbar() {
 
         <button onClick={handleOpenCart}>سبد خرید ({cartQuantity})</button>
 
-        <button onClick={handleOpenLogin}>ورود</button>
+        { !userInfo && <button onClick={handleOpenLogin}>ورود</button>}
+
+        {userInfo && <div className="user-nav">
+          <span>{userInfo.name}</span>
+          <button onClick={handleLogOut}>خروج</button>
+          </div>}
 
         {isOpen && <LoginModal/>}
         
