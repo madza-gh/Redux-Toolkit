@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { closeLoginModal } from "../store/uiSlice";
 import { useEffect, useState } from "react";
 import { loginUser } from "../store/userSlice";
+import ModalWrapper from "./ModalWrapper";
 
 function LoginModal() {
   const [email, setEmail] = useState("");
@@ -32,13 +33,8 @@ function LoginModal() {
   }
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal">
-        <button className="close-btn" onClick={handleCloseButton}>
-          x
-        </button>
-
-        <h2>ورود</h2>
+    <ModalWrapper onClose={handleCloseButton}>
+      <h2>ورود</h2>
 
         <form onSubmit={handleOnSubmit}>
           <input
@@ -56,8 +52,7 @@ function LoginModal() {
           </button>
         </form>
         {error && <p>{error}</p>}
-      </div>
-    </div>
+    </ModalWrapper>
   );
 }
 
