@@ -1,25 +1,22 @@
 import { useState } from "react";
 import { useAppDispatch } from "../store/hooks";
-import { addProduct } from "../store/productSlice";
-import { v4 as uuidv4 } from "uuid"
+import { createProduct } from "../store/productSlice";
 
 function AddProduct() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
-  const [image, setImage] = useState<File | null>(null)
+  //const [image, setImage] = useState<File | null>(null)
 
   const dispatch = useAppDispatch()
   
-  const imageUrl = image ? URL.createObjectURL(image) : ""
+  //const imageUrl = image ? URL.createObjectURL(image) : ""
 
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    dispatch(addProduct({
-      id: uuidv4(),
+    dispatch(createProduct({
       title,
       price: parseFloat(price),
-      image: imageUrl
     }))
 
     console.log("product added", { title, price });
@@ -52,7 +49,7 @@ function AddProduct() {
             }}
           />
         </div>
-        <div>
+        {/* <div>
           <label>عکس</label>
           <input 
           type="file" 
@@ -64,7 +61,7 @@ function AddProduct() {
             }
           }}
           />
-        </div>
+        </div> */}
         <button type="submit">اضافه کردن محصول</button>
       </form>
     </section>

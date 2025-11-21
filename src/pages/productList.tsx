@@ -1,15 +1,25 @@
+import { useEffect } from "react";
 import Product from "../components/Product";
-import { useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { fetchProducts } from "../store/productSlice";
 
 function ProductList() {
-
-  const products = useAppSelector((state) => state.products.items)
+  const dispatch = useAppDispatch()
+  const {items, loading, error} = useAppSelector((state) => state.products)
   
+  useEffect(() =>{
+    dispatch(fetchProducts())
+  }, [dispatch])
+
+  if(loading) return <p>loading...</p>
+  if(error) return <p>Error: {error}</p>
+
+
   return (
     <div className="product-list">
       <div className="product-items">
-        {products.map((item) => (
-          <Product key={item.id} {...item}/>
+        {items.map((item) => (
+          <Product key={item._id} {...item}/>
         ))}
       </div>
     </div>

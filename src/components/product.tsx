@@ -2,23 +2,18 @@ import { useAppDispatch } from "../store/hooks"
 
 import { addToCart } from "../store/cart-slice"
 
-type ProductProps ={
-    id: string
-    title: string
-    price: number
-    image: string
-}
+import { Product as ProductType,  } from "../api/productApi"
 
-function Product({id, title, price, image}: ProductProps){
+function Product({_id, title, price}: ProductType){
     const dispatch = useAppDispatch()
 
     function handleAddToCart(){
-        dispatch(addToCart({id, title, price}))
+        dispatch(addToCart({_id: _id!, title, price}))
     }
 
     return(
         <div className="product">
-            <img src={image} />
+            {/* <img src={image} /> */}
             <div>
                 <h3>{title}</h3>
                 <p className="product-price">{price}</p>

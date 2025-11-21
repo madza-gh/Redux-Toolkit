@@ -13,7 +13,7 @@ export const getProducts = async (): Promise<Product[]> =>{
     return response.data
 }
 
-export const addProduct = async (productData: Product): Promise<Product> =>{
+export const addProducts = async (productData: Product): Promise<Product> =>{
     const response = await axios.post(API_URL, productData)
     return response.data
 }
