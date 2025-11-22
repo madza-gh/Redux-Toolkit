@@ -29,5 +29,5 @@ const uiSlice = createSlice({
     }
 })
 
-export const {openLoginModal, closeLoginModal} = uiSlice.actions
+export const {openLoginModal, closeLoginModal, openSignupModal, closeSignupModal} = uiSlice.actions
 export default uiSlice.reducer
