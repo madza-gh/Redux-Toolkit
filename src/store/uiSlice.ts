@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface UIState{
     loginModalOpen: boolean
+    signupModalOpen: boolean
 }
 
 const initialState: UIState = {
-    loginModalOpen: false
+    loginModalOpen: false,
+    signupModalOpen:false
 }
 
 const uiSlice = createSlice({
@@ -17,6 +19,12 @@ const uiSlice = createSlice({
         },
         closeLoginModal(state){
             state.loginModalOpen = false
+        },
+        openSignupModal(state){
+            state.signupModalOpen = true
+        },
+        closeSignupModal(state){
+            state.signupModalOpen = false
         }
     }
 })
