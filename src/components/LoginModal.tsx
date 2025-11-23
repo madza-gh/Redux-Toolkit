@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { closeLoginModal } from "../store/uiSlice";
+import { closeLoginModal, openSignupModal } from "../store/uiSlice";
 import { useEffect, useState } from "react";
 import { loginUser } from "../store/userSlice";
 import ModalWrapper from "./ModalWrapper";
@@ -31,6 +31,10 @@ function LoginModal() {
       })
     );
   }
+  function handleSwitchToSignup(){
+    dispatch(closeLoginModal())
+    dispatch(openSignupModal())
+  }
 
   return (
     <ModalWrapper onClose={handleCloseButton}>
@@ -52,6 +56,10 @@ function LoginModal() {
           </button>
         </form>
         {error && <p>{error}</p>}
+
+        <p>حساب کاربری نداری؟ {' '}
+          <button onClick={handleSwitchToSignup}>ثبت نام</button>
+        </p>
     </ModalWrapper>
   );
 }

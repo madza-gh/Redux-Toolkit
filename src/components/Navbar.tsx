@@ -5,6 +5,7 @@ import LoginModal from "./LoginModal";
 import {openLoginModal} from '../store/uiSlice'
 import { logout } from "../store/userSlice";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
+import SignupModal from "./SignupModal";
 
 function Navbar() {
   const [cartIsOpen, setCartIsOpen] = useState(false);
@@ -14,6 +15,7 @@ function Navbar() {
   const {userInfo} = useAppSelector((state) => state.user)
 
   const isOpen = useAppSelector(state => state.ui.loginModalOpen)
+  const isSignupOpen = useAppSelector(state => state.ui.signupModalOpen)
 
   const cartQuantity = useAppSelector((state) =>
     state.cart.items.reduce((value, item) => value + item.quantity, 0)
@@ -58,6 +60,7 @@ function Navbar() {
           </div>}
 
         {isOpen && <LoginModal/>}
+        {isSignupOpen && <SignupModal/>}
         
       </div>
     </>

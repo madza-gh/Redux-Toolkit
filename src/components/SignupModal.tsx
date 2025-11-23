@@ -1,33 +1,67 @@
 import ModalWrapper from "./ModalWrapper";
-import { useAppDispatch } from "../store/hooks";
-import { closeSignupModal } from "../store/uiSlice";
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { closeSignupModal, openLoginModal } from "../store/uiSlice";
+import { useState, useEffect } from "react";
+import { registerUser } from "../store/userSlice";
 
+function SignupModal() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useAppDispatch();
+  const { loading, error, userInfo } = useAppSelector((state) => state.user);
 
-function SingupModal(){
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const dispatch = useAppDispatch()
+  useEffect(() => {
+    if (userInfo) dispatch(closeSignupModal());
+  }, [userInfo]);
 
-    function handleModalClose(){
-        dispatch(closeSignupModal)
-    }
-    
-    return(
-        <ModalWrapper onClose={handleModalClose}>
-            <h2>ثبت نام</h2>
+  function handleModalClose() {
+    dispatch(closeSignupModal());
+  }
 
-            <div>
-                <form onSubmit={handleFormSubmit}>
-                    <input type="text" onChange={(e) => setName(e.target.value)}/>
-                    <input type="email" onChange={(e) => setEmail(e.target.value)}/>
-                    <input type="password" onChange={(e) => setPassword(e.target.value)}/>
-                    <button type="submit">ثبت نام</button>
-                </form>
-            </div>
-        </ModalWrapper>
-    )
+  function handleFormSubmit(e: React.FormEvent) {
+    e.preventDefault()
+
+    dispatch(registerUser({ name, email, password }));
+  }
+
+  function handelSwitchToLogin() {
+    dispatch(closeSignupModal());
+    dispatch(openLoginModal());
+  }
+
+  return (
+    <ModalWrapper onClose={handleModalClose}>
+      <h2>ثبت نام</h2>
+
+      <div>
+        <form onSubmit={handleFormSubmit}>
+          <input
+            placeholder="نام کاربری"
+            type="text"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            placeholder="ایمیل"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            placeholder="پسورد"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? "در حال ثبت نام" : "ثبت نام"}
+          </button>
+        </form>
+        {error && <p>{error}</p>}
+        <p>
+          قبلا ثبت نام کردی؟ <button onClick={handelSwitchToLogin}>ورود</button>
+        </p>
+      </div>
+    </ModalWrapper>
+  );
 }
 
-export default SingupModal
+export default SignupModal;
