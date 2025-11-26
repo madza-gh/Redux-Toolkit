@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { createProduct } from "../store/productSlice";
+import { Navigate } from "react-router-dom";
 
 function AddProduct() {
   const [title, setTitle] = useState("");
@@ -8,6 +9,7 @@ function AddProduct() {
   //const [image, setImage] = useState<File | null>(null)
 
   const dispatch = useAppDispatch()
+  const {userInfo} = useAppSelector((state) => state.user)
   
   //const imageUrl = image ? URL.createObjectURL(image) : ""
 
@@ -24,6 +26,12 @@ function AddProduct() {
     setTitle("");
     setPrice("");
   };
+
+  if(!userInfo || userInfo.role !== 'admin'){
+    return (
+      <Navigate to={'/'} replace/>
+    )
+  }
 
   return (
     <section className="add-product">

@@ -13,7 +13,13 @@ export const getProducts = async (): Promise<Product[]> =>{
     return response.data
 }
 
-export const addProducts = async (productData: Product): Promise<Product> =>{
-    const response = await axios.post(API_URL, productData)
+export const addProducts = async (productData: Product, token: string): Promise<Product> =>{
+    const config ={
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.post(API_URL, productData, config)
     return response.data
 }

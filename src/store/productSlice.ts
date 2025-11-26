@@ -23,8 +23,11 @@ export const fetchProducts = createAsyncThunk<Product[]>(
 
 export const createProduct = createAsyncThunk<Product, Product>(
     "products/create",
-    async(productData) =>  {
-        return await addProducts(productData)
+    async(productData, {getState}) =>  {
+        const state = getState() as any
+        const token = state.user.userInfo.token
+
+        return await addProducts(productData, token)
     }
 )
 

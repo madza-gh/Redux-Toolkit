@@ -46,9 +46,11 @@ function Navbar() {
           صفحه اصلی
         </Link>
 
-        <Link to={"add-product"} className="nav-link">
+        {userInfo?.role === 'admin' && (
+          <Link to={"add-product"} className="nav-link">
           افزودن محصول
-        </Link>
+          </Link>
+        )}
 
         <button onClick={handleOpenCart}>سبد خرید ({cartQuantity})</button>
 

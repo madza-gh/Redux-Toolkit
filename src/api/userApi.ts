@@ -8,6 +8,7 @@ export interface UserType{
     email: string
     password: string
     token?: string
+    role?: string
 }
 
 export const login = async (userData: UserType): Promise<UserType> => {
